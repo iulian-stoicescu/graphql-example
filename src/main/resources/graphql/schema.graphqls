@@ -1,0 +1,49 @@
+# the Query, Mutation and Subscription types define the entry points in our GraphQL server ( just like endpoints in REST )
+
+type Query {
+  bookById(id: ID!): Book
+  books(bookType: BookType): [Book]
+
+  authorById(id: ID = 1): Author
+  authors: [Author]
+}
+
+type Mutation {
+  createBook(bookInput: BookInput!): Book
+}
+
+type Subscription {
+  booksSubscription(id: ID): Book
+}
+
+# object types ( just like model classes )
+
+type Book {
+  id: ID
+  name: String
+  pageCount: Int
+  type: BookType
+  author: Author
+}
+
+type Author {
+  id: ID
+  firstName: String
+  lastName: String
+}
+
+enum BookType {
+  ADVENTURE
+  FANTASY
+  MYSTERY
+}
+
+# input types ( used as arguments )
+
+input BookInput {
+  name: String!
+  pageCount: Int
+  type: BookType
+  authorFirstName: String
+  authorLastName: String
+}
